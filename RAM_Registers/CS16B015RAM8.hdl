@@ -1,0 +1,18 @@
+CHIP CS16B015RAM8 {
+    IN in[16], load, address[3];
+    OUT out[16];
+
+    PARTS:
+    Mux16(a=ax, b=in, sel=load, out=a1, out=a2, out=a3, out=a4, out=a5, out=a6, out=a7, out=a8);
+    DMux8Way(in=load, sel=address[0..2], a=x1, b=x2, c=x3, d=x4, e=x5, f=x6, g=x7, h=x8);
+    CS16B015Register16(in=a1, load=x1, out=b1);
+    CS16B015Register16(in=a2, load=x2, out=b2);
+    CS16B015Register16(in=a3, load=x3, out=b3);
+    CS16B015Register16(in=a4, load=x4, out=b4);
+    CS16B015Register16(in=a5, load=x5, out=b5);
+    CS16B015Register16(in=a6, load=x6, out=b6);
+    CS16B015Register16(in=a7, load=x7, out=b7);
+    CS16B015Register16(in=a8, load=x8, out=b8);
+    Mux8Way16(a=b1, b=b2, c=b3, d=b4, e=b5, f=b6, g=b7, h=b8, sel=address[0..2], out=ax, out= out);
+   
+}

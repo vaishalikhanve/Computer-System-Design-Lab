@@ -1,0 +1,18 @@
+
+CHIP CS16B015RAM4K {
+    IN in[16], load, address[12];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+	DMux8Way(in=load, sel=address[0..2], a=a1, b=a2, c=a3, d=a4, e=a5, f=a6, g=a7, h=a8);
+    CS16B015RAM512(in=in, load=a1, address=address[3..11], out=b1);
+    CS16B015RAM512(in=in, load=a2, address=address[3..11], out=b2);
+    CS16B015RAM512(in=in, load=a3, address=address[3..11], out=b3);
+    CS16B015RAM512(in=in, load=a4, address=address[3..11], out=b4);
+    CS16B015RAM512(in=in, load=a5, address=address[3..11], out=b5);
+    CS16B015RAM512(in=in, load=a6, address=address[3..11], out=b6);
+    CS16B015RAM512(in=in, load=a7, address=address[3..11], out=b7);
+    CS16B015RAM512(in=in, load=a8, address=address[3..11], out=b8);
+    Mux8Way16(a=b1, b=b2, c=b3, d=b4, e=b5, f=b6, g=b7, h=b8, sel=address[0..2], out=out);
+}

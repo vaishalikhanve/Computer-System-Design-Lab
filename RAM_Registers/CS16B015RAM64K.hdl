@@ -1,0 +1,18 @@
+
+CHIP CS16B015RAM64K {
+    IN in[16], load, address[16];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+	DMux(in=load,sel=address[0],a=a1,b=a2);
+	CS16B015RAM32K(in=in, load=a1, address=address[1..15], out=b1);
+    CS16B015RAM32K(in=in, load=a2, address=address[1..15], out=b2);
+	Mux16(a=b1,b=b2,sel=address[0],out=out);
+	//DMux4Way(in=load, sel=address[0..1], a=a1, b=a2, c=a3, d=a4);
+    //CS16B015RAM16K(in=in, load=a1, address=address[2..15], out=b1);
+    //CS16B015RAM16K(in=in, load=a2, address=address[2..15], out=b2);
+    //CS16B015RAM16K(in=in, load=a3, address=address[2..15], out=b3);
+    //CS16B015RAM16K(in=in, load=a4, address=address[2..15], out=b4);
+    //Mux4Way16(a=b1, b=b2, c=b3, d=b4, sel=address[0..1], out=out);
+}

@@ -1,0 +1,8 @@
+CHIP CS16B015Bit {
+    IN in, load;
+    OUT out;
+
+    PARTS:
+    Mux(a=con2, b=in, sel=load, out=con1);
+    DFF(in=con1, out=con2, out=out);
+}

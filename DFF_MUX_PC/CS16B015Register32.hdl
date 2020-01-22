@@ -1,0 +1,11 @@
+CHIP CS16B015Register32 {
+    IN in1[16], in2[16], load;
+    OUT out1[16],out2[16];
+
+    PARTS:
+	CS16B015Register16(in1,load,out1);
+	CS16B015Register16(in2,load,out2);
+	
+    
+    
+}

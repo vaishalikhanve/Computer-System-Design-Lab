@@ -1,0 +1,1 @@
+Input VM file name having '.vm' extention. As a output, you will find newly generated file with name same as VM file with '.asm' extention.

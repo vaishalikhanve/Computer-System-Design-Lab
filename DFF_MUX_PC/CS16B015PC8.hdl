@@ -1,0 +1,11 @@
+CHIP CS16B015PC8 {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    Inc8(in=m, out=n);
+    Mux8(a=l, b=n, sel=inc, out=o);
+    Mux8(a=o, b=in, sel=load, out=p);
+    Mux8(a=p, b=false, sel=reset, out=q);
+    Register(in=q, load=true, out=out, out=l, out=m);
+}

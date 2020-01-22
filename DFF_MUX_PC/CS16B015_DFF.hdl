@@ -1,0 +1,14 @@
+
+CHIP CS16B015_DFF {
+    IN D, clk;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+	CS16B015Mux(a=D, b=con1, sel=clk, out=con1);
+	Not(in=con1,out=con2);
+	Not(in=clk, out=con4);
+	CS16B015Mux(a=con2, b=con5, sel=con4, out=con5);
+	Not(in=con5, out=out);
+	
+}
