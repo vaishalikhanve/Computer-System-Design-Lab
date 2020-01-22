@@ -1,0 +1,66 @@
+// Implementation: the ALU manipulates the x and y
+// inputs and then operates on the resulting values, 
+// as follows:
+// if (zx==1) set x = 0        // 16-bit constant
+// if (nx==1) set x = ~x       // bitwise "not"
+// if (zy==1) set y = 0        // 16-bit constant
+// if (ny==1) set y = ~y       // bitwise "not"
+// if (f==1)  set out = x + y  // integer 2's complement addition
+// if (f==0)  set out = x & y  // bitwise "and"
+// if (no==1) set out = ~out   // bitwise "not"
+// if (out==0) set zr = 1
+// if (out<0) set ng = 1
+
+  
+CHIP CS16B015ALU {
+    IN  
+        x[16], y[16],  // 16-bit inputs        
+        zx, // zero the x input?
+        nx, // negate the x input?
+        zy, // zero the y input?
+        ny, // negate the y input?
+        f,  // compute  out = x + y (if 1) or out = x & y (if 0)
+        no; // negate the out output?
+
+    OUT 
+        out[16], // 16-bit output
+        zr, // 1 if (out==0), 0 otherwise
+        ng; // 1 if (out<0),  0 otherwise
+
+    PARTS:
+   Mux16(a=x, b=false, sel=zx, out=con1);
+   Not16(in=con1, out=con3);
+   Mux16(a=con1, b=con3, sel=nx, out=con2);
+   Mux16(a=y, b=false, sel=zy, out=con4);
+   Not16(in=con4, out=con5);
+   Mux16(a=con4, b=con5, sel=ny, out=con6);
+   And16(a=con2, b=con6, out=con7);
+   Add16(a=con2, b=con6, out=con8);
+   Mux16(a=con7, b=con8, sel=f, out=con9);
+   Not16(in=con9, out=con10);
+   Mux16(a=con9, b=con10, sel=no, out[15]=con11, out[0..14]=t);
+   Mux16(a=con9, b=con10, sel=no, out[0..7]=aa, out[8..15]=con12);
+   Or8Way(in=aa, out=con13);
+   Or8Way(in=con12, out=con14);
+   Or(a=con13, b=con14, out=con15);
+   Not(in=con15, out=zr);
+   Mux16(a=con9, b=con10, sel=no, out=out);
+   Mux(a=false, b=true, sel=con11, out=ng);
+   //Mux16(a=x, b=false, sel=zx, out=con1);
+   //Mux16(a=y, b=false, sel=zy, out=con2);
+   //Xor16(a=con1, b[0..15]=nx, out=con3);
+   //Xor16(a=con2, b[0..15]=ny, out=con4);
+   //CS16B015Add16(a=con3, b=con4, out=con5);
+   //And16(a=con3, b=con4, out=con6);
+   //Mux16(a=con5, b=con6, sel=f, out=con7);
+   //Xor16(a=con7, b=no, out=out);
+   //Not16(in=out,out=con8);
+   //Not16(in=false, out=con9);
+   //And16(a=con8, b=false, out=ng);
+   //And16(a=con9, b=out, out=con11);
+   //CS16B015Or16(a=con10, b=con11, out=con12);
+   //Not16(in=con12, out=zr);
+   
+   
+
+}

@@ -1,0 +1,38 @@
+CHIP CS16B015Sub16 {
+    IN a[16], b[16], sel;
+    OUT out[16];
+
+    PARTS:
+    Xor(a=sel, b=b[0], out=con1);
+    Xor(a=sel, b=b[1], out=con2);
+    Xor(a=sel, b=b[2], out=con3);
+    Xor(a=sel, b=b[3], out=con4);
+    Xor(a=sel, b=b[4], out=con5);
+    Xor(a=sel, b=b[5], out=con6);
+    Xor(a=sel, b=b[6], out=con7);
+    Xor(a=sel, b=b[7], out=con8);
+    Xor(a=sel, b=b[8], out=con9);
+    Xor(a=sel, b=b[9], out=con10);
+    Xor(a=sel, b=b[10], out=con11);
+    Xor(a=sel, b=b[11], out=con12);
+    Xor(a=sel, b=b[12], out=con13);
+    Xor(a=sel, b=b[13], out=con14);
+    Xor(a=sel, b=b[14], out=con15);
+    Xor(a=sel, b=b[15], out=con16);
+    FullAdder(a=a[0], b=con1, c=sel, sum=out[0], carry=con17);
+    FullAdder(a=a[1], b=con2, c=con17, sum=out[1], carry=con18);
+    FullAdder(a=a[2], b=con3, c=con18, sum=out[2], carry=con19);
+    FullAdder(a=a[3], b=con4, c=con19, sum=out[3], carry=con20);
+    FullAdder(a=a[4], b=con5, c=con20, sum=out[4], carry=con21);
+    FullAdder(a=a[5], b=con6, c=con21, sum=out[5], carry=con22);
+    FullAdder(a=a[6], b=con7, c=con22, sum=out[6], carry=con23);
+    FullAdder(a=a[7], b=con8, c=con23, sum=out[7], carry=con24);
+    FullAdder(a=a[8], b=con9, c=con24, sum=out[8], carry=con25);
+    FullAdder(a=a[9], b=con10, c=con25, sum=out[9], carry=con26);
+    FullAdder(a=a[10], b=con11, c=con26, sum=out[10], carry=con27);
+    FullAdder(a=a[11], b=con12, c=con27, sum=out[11], carry=con28);
+    FullAdder(a=a[12], b=con13, c=con28, sum=out[12], carry=con29);
+    FullAdder(a=a[13], b=con14, c=con29, sum=out[13], carry=con30);
+    FullAdder(a=a[14], b=con15, c=con30, sum=out[14], carry=con31);
+    FullAdder(a=a[15], b=con16, c=con31, sum=out[15], carry=con32);
+}
