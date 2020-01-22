@@ -1,0 +1,9 @@
+CHIP CS16B015DMux {
+    IN in, sel;
+    OUT a, b;
+
+    PARTS:
+	CS16B015Not(in=sel,out=con1);
+	CS16B015And(a=con1,b=in,out=a);
+	CS16B015And(a=sel,b=in,out=b);
+}

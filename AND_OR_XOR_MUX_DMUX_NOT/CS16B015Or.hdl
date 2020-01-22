@@ -1,0 +1,9 @@
+CHIP CS16B015Or {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+	Nand(a=a,b=a,out=con1);
+	Nand(a=b,b=b,out=con2);
+	Nand(a=con1,b=con2,out=out);
+}

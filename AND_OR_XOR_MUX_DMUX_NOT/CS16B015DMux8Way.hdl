@@ -1,0 +1,13 @@
+CHIP CS16B015DMux8Way {
+    IN in, sel[3];
+    OUT out[8];
+
+    PARTS:
+    CS16B015DMux(in=in, sel=sel[2], a=con1, b=con2);
+    CS16B015DMux(in=con1, sel=sel[1], a=con3, b=con4);
+    CS16B015DMux(in=con2, sel=sel[1], a=con5, b=con6);
+    CS16B015DMux(in=con3, sel=sel[0], a=out[0], b=out[1]);
+    CS16B015DMux(in=con4, sel=sel[0], a=out[2], b=out[3]);
+    CS16B015DMux(in=con5, sel=sel[0], a=out[4], b=out[5]);
+    CS16B015DMux(in=con6, sel=sel[0], a=out[6], b=out[7]);
+}

@@ -1,0 +1,9 @@
+CHIP CS16B015DMux4Way {
+    IN in, sel[2];
+    OUT a, b, c, d;
+
+    PARTS:
+    CS16B015DMux(in=in, sel=sel[1], a=con1, b=con2);
+    CS16B015DMux(in=con1, sel=sel[0], a=a, b=b);
+    CS16B015DMux(in=con2, sel=sel[0], a=c, b=d);
+}
